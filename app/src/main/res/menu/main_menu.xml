@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/camera"
+        android:icon="@drawable/ic_camera_black_24dp"
+        android:title="Table"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/search"
+        android:title="Головна"
+        app:showAsAction="never" />
+    <item android:id="@+id/edit"
+        android:title="Правка"
+        app:showAsAction="never">
+        <menu>
+            <item android:id="@+id/edit_copy"
+                android:title="Копіювати"/>
+            <item android:id="@+id/edit_past"
+                android:title="Вставити"/>
+        </menu>
+
+    </item>
+</menu>
