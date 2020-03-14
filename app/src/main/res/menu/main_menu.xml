@@ -2,14 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/camera"
+    <item android:id="@+id/table"
         android:icon="@drawable/ic_camera_black_24dp"
         android:title="Table"
         app:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/search"
+    <item android:id="@+id/home"
         android:title="Головна"
         app:showAsAction="never" />
+
+    <item android:id="@+id/listviewitem"
+        android:title="Список"
+        app:showAsAction="never" />
+
+
+    <item android:id="@+id/listviewsimpleitem"
+        android:title="Простий список"
+        app:showAsAction="never" />
+
+
     <item android:id="@+id/edit"
         android:title="Правка"
         app:showAsAction="never">

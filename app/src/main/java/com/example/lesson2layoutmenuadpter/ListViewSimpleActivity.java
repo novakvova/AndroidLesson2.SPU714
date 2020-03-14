@@ -1,23 +1,36 @@
 package com.example.lesson2layoutmenuadpter;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+public class ListViewSimpleActivity extends AppCompatActivity {
 
-public class TableActivity extends AppCompatActivity {
+    String[] names = { "Иван", "Марья", "Петр", "Антон", "Даша", "Борис",
+            "Костя", "Игорь", "Анна", "Денис", "Андрей" };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_table);
-    }
+        setContentView(R.layout.activity_list_view_simple);
+        // находим список
+        ListView lvMain = (ListView) findViewById(R.id.lvMain);
 
+        // создаем адаптер
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, names);
+
+        // присваиваем адаптер списку
+        lvMain.setAdapter(adapter);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -60,4 +73,6 @@ public class TableActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 }
