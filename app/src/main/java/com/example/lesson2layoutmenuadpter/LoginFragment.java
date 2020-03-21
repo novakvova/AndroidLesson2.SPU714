@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.lesson2layoutmenuadpter.utils.CommonUtils;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -40,6 +41,7 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
+                CommonUtils.showLoading(getActivity());
                 if(!isPasswordValid(passwordEditText.getText()))
                 {
                     passwordTextInput.setError("Пароль має бути мін 8 симаолів");

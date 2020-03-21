@@ -4,6 +4,11 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         applicationId "com.example.lesson2layoutmenuadpter"
         minSdkVersion 16
@@ -36,6 +41,17 @@ dependencies {
     implementation "com.google.android.material:material:$material_version"
     implementation "com.google.code.gson:gson:$gson_version"
     implementation "com.android.volley:volley:$volley_version"
+
+    //Add RecyclerView
+    implementation 'androidx.cardview:cardview:1.0.0-beta01'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0-beta01'
+
+    // ButterKnife for view binding
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    // Glide for image loading
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
 
 }
