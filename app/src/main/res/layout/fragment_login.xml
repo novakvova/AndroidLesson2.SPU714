@@ -73,8 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:text="Вхід"
-                />
+                android:text="Вхід" />
 
             <Button
                 android:id="@+id/btn_register"
@@ -84,10 +83,8 @@
                 android:layout_marginRight="12dp"
                 android:layout_toStartOf="@id/btn_login"
                 android:layout_toLeftOf="@id/btn_login"
-                android:text="Створити акаунт"
-                style="?attr/materialButtonOutlinedStyle"/>
-
-
+                style="?attr/materialButtonOutlinedStyle"
+                android:text="Створити акаунт" />
 
         </RelativeLayout>
 
