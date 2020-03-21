@@ -7,7 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.os.Handler;
+//import android.os.Handler;
 import android.text.Editable;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -23,7 +23,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginFragment extends Fragment {
 
-    Handler h;
+    //Handler h;
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -45,8 +45,6 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-
-                //CommonUtils.hideLoading();
                 if (!isPasswordValid(passwordEditText.getText())) {
                     passwordTextInput.setError("Пароль має бути мін 8 симаолів");
 
@@ -86,7 +84,6 @@ public class LoginFragment extends Fragment {
                     Log.d("Loging", "=---------Hello--------");
                     TimeUnit.MILLISECONDS.sleep(1000);
                     // обновляем ProgressBar
-                    // обновляем ProgressBar
                     //h.post(updateProgress);
                     CommonUtils.hideLoading();
                 } catch (InterruptedException e) {
@@ -98,9 +95,9 @@ public class LoginFragment extends Fragment {
         return null;
     }
     // обновление ProgressBar
-    Runnable updateProgress = new Runnable() {
-        public void run() {
-            CommonUtils.hideLoading();
-        }
-    };
+//    Runnable updateProgress = new Runnable() {
+//        public void run() {
+//            CommonUtils.hideLoading();
+//        }
+//    };
 }
