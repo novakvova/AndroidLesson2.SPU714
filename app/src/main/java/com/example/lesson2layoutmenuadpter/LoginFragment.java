@@ -2,6 +2,7 @@ package com.example.lesson2layoutmenuadpter;
 
 import java.util.concurrent.TimeUnit;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -53,6 +54,8 @@ public class LoginFragment extends Fragment {
                     CommonUtils.showLoading(getActivity());
                     //h = new Handler();
                     uploadData();
+                    Intent intent;
+                    intent = new Intent(getActivity(), TestActivity.class);
 
                 }
             }
@@ -86,6 +89,8 @@ public class LoginFragment extends Fragment {
                     // обновляем ProgressBar
                     //h.post(updateProgress);
                     CommonUtils.hideLoading();
+
+                    //((NavigationHost) getActivity()).navigateTo(new SportNewsFragment(), false); // Navigate to the next Fragment
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
