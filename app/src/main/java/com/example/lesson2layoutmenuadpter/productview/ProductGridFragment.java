@@ -15,6 +15,7 @@ import com.example.lesson2layoutmenuadpter.R;
 import com.example.lesson2layoutmenuadpter.network.ProductEntry;
 import com.example.lesson2layoutmenuadpter.retorfitProduct.ProductDTO;
 import com.example.lesson2layoutmenuadpter.retorfitProduct.ProductDTOService;
+import com.example.lesson2layoutmenuadpter.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,7 @@ public class ProductGridFragment extends Fragment {
         int largePadding = getResources().getDimensionPixelSize(R.dimen.shr_product_grid_spacing);
         int smallPadding = getResources().getDimensionPixelSize(R.dimen.shr_product_grid_spacing_small);
         recyclerView.addItemDecoration(new ProductGridItemDecoration(largePadding, smallPadding));
-
+        CommonUtils.showLoading(getActivity());
         ProductDTOService.getInstance()
                 .getJSONApi()
                 .getAllProducts()
@@ -74,11 +75,13 @@ public class ProductGridFragment extends Fragment {
                         }
                         ProductCardRecyclerViewAdapter newAdapter = new ProductCardRecyclerViewAdapter(newlist);
                         recyclerView.swapAdapter(newAdapter, false);
+                        CommonUtils.hideLoading();
                     }
 
                     @Override
                     public void onFailure(Call<List<ProductDTO>> call, Throwable t) {
                         Log.e(TAG, "----------Bad Request----------");
+                        CommonUtils.hideLoading();
                     }
                 });
 
