@@ -12,6 +12,8 @@
     <string name="sports_info_placeholder">Опис новини</string>
     <string name="empty_screen">We do not have anything\nhere right now. Please Retry</string>
     <string name="btn_retry">Retry</string>
+    <string name="shr_product_title">Назва продукта</string>
+    <string name="shr_product_description">Опис продукта</string>
 
     <string-array name="sports_images">
         <item>https://www.imgacademy.com/sites/default/files/venue-baseball-pg11.jpg</item>
