@@ -42,6 +42,7 @@ public class LoginFragment extends Fragment {
         final TextInputEditText passwordEditText = view.findViewById(R.id.password_edit_text);
 
 
+
         loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -72,6 +73,18 @@ public class LoginFragment extends Fragment {
                 return false;
             }
         });
+
+
+        Button btnRegister = view.findViewById(R.id.btn_register);
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((NavigationHost) getActivity()).navigateTo(new RegisterFragment(), true); // Navigate to the next Fragment
+            }
+        });
+
+
 
         return view;
     }
