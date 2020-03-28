@@ -6,14 +6,22 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.lesson2layoutmenuadpter.R;
 import com.example.lesson2layoutmenuadpter.network.ProductEntry;
+import com.example.lesson2layoutmenuadpter.retorfitProduct.ProductDTO;
+import com.example.lesson2layoutmenuadpter.retorfitProduct.ProductDTOService;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,14 +50,41 @@ public class ProductGridFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
 
-        List<ProductEntry> list = ProductEntry.initProductEntryList(getResources());
-        ProductCardRecyclerViewAdapter adapter = new ProductCardRecyclerViewAdapter(list);
-
-        recyclerView.setAdapter(adapter);
+//        List<ProductEntry> list = ProductEntry.initProductEntryList(getResources());
+//        ProductCardRecyclerViewAdapter adapter = new ProductCardRecyclerViewAdapter(list);
+//
+//        recyclerView.setAdapter(adapter);
 
         int largePadding = getResources().getDimensionPixelSize(R.dimen.shr_product_grid_spacing);
         int smallPadding = getResources().getDimensionPixelSize(R.dimen.shr_product_grid_spacing_small);
         recyclerView.addItemDecoration(new ProductGridItemDecoration(largePadding, smallPadding));
+
+        ProductDTOService.getInstance()
+                .getJSONApi()
+                .getAllProducts()
+                .enqueue(new Callback<List<ProductDTO>>() {
+                    @Override
+                    public void onResponse(Call<List<ProductDTO>> call, Response<List<ProductDTO>> response) {
+                        Log.d(TAG, "----------Response good----------");
+                        List<ProductDTO> list = response.body();
+                        List<ProductEntry> newlist = new ArrayList<ProductEntry>();//ProductEntry.initProductEntryList(getResources());
+                        for (ProductDTO item : list) {
+                            ProductEntry pe=new ProductEntry(item.getTitle(),item.getUrl(),item.getUrl(), item.getPrice(),"sdfasd");
+                            newlist.add(pe);
+                        }
+                        ProductCardRecyclerViewAdapter newAdapter = new ProductCardRecyclerViewAdapter(newlist);
+                        recyclerView.swapAdapter(newAdapter, false);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<ProductDTO>> call, Throwable t) {
+                        Log.e(TAG, "----------Bad Request----------");
+                    }
+                });
+
+
+
+
 
         return view;
     }
