@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.lesson2layoutmenuadpter.productview.ProductGridFragment;
 import com.example.lesson2layoutmenuadpter.utils.CommonUtils;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -52,11 +53,12 @@ public class LoginFragment extends Fragment {
 
                 } else {
                     passwordTextInput.setError(null);
-                    CommonUtils.showLoading(getActivity());
+                    //CommonUtils.showLoading(getActivity());
+                    ((NavigationHost) getActivity()).navigateTo(new ProductGridFragment(), true); // Navigate to the next Fragment
                     //h = new Handler();
-                    uploadData();
-                    Intent intent;
-                    intent = new Intent(getActivity(), TestActivity.class);
+//                    uploadData();
+//                    Intent intent;
+//                    intent = new Intent(getActivity(), TestActivity.class);
 
                 }
             }
