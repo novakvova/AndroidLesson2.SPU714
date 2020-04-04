@@ -1,5 +1,6 @@
 package com.example.lesson2layoutmenuadpter;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import android.content.Intent;
@@ -16,11 +17,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.lesson2layoutmenuadpter.account.AccountService;
+import com.example.lesson2layoutmenuadpter.account.LoginDTO;
+import com.example.lesson2layoutmenuadpter.account.TokenDTO;
 import com.example.lesson2layoutmenuadpter.productview.ProductGridFragment;
 import com.example.lesson2layoutmenuadpter.utils.CommonUtils;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class LoginFragment extends Fragment {
@@ -41,8 +50,9 @@ public class LoginFragment extends Fragment {
         Button loginButton = view.findViewById(R.id.btn_login);
         final TextInputLayout passwordTextInput = view.findViewById(R.id.password_text_input);
         final TextInputEditText passwordEditText = view.findViewById(R.id.password_edit_text);
-
-
+        final TextInputLayout emailTextInput = view.findViewById(R.id.email_text_input);
+        final TextInputEditText emailEditText = view.findViewById(R.id.email_edit_text);
+        TextView errorMessage = view.findViewById(R.id.error_message);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -54,8 +64,35 @@ public class LoginFragment extends Fragment {
                 } else {
                     passwordTextInput.setError(null);
                     //CommonUtils.showLoading(getActivity());
+                    String email = emailEditText.getText().toString();
+                    String password = passwordEditText.getText().toString();
+                    LoginDTO loginDTO = new LoginDTO(email, password);
+                    errorMessage.setText("");
+                    AccountService.getInstance()
+                            .getJSONApi()
+                            .loginRequest(loginDTO)
+                            .enqueue(new Callback<TokenDTO>() {
+                                @Override
+                                public void onResponse(Call<TokenDTO> call, Response<TokenDTO> response) {
+                                    if (response.isSuccessful()){
+                                        Log.i("-----------", "login good");
+                                    }else {
+                                        Log.e("------!!!-----", "bad request");
+                                        try {
+                                            String json = response.errorBody().string();
+                                            errorMessage.setText(json);
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
 
-                    ((NavigationHost) getActivity()).navigateTo(new ProductGridFragment(), true); // Navigate to the next Fragment
+                                @Override
+                                public void onFailure(Call<TokenDTO> call, Throwable t) {
+
+                                }
+                            });
+//                    ((NavigationHost) getActivity()).navigateTo(new ProductGridFragment(), true); // Navigate to the next Fragment
 
                     //h = new Handler();
 //                    uploadData();
