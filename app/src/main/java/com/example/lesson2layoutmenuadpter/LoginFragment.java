@@ -21,11 +21,13 @@ import android.widget.TextView;
 
 import com.example.lesson2layoutmenuadpter.account.AccountService;
 import com.example.lesson2layoutmenuadpter.account.LoginDTO;
+import com.example.lesson2layoutmenuadpter.account.LoginDTOBadRequest;
 import com.example.lesson2layoutmenuadpter.account.TokenDTO;
 import com.example.lesson2layoutmenuadpter.productview.ProductGridFragment;
 import com.example.lesson2layoutmenuadpter.utils.CommonUtils;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -75,12 +77,18 @@ public class LoginFragment extends Fragment {
                                 @Override
                                 public void onResponse(Call<TokenDTO> call, Response<TokenDTO> response) {
                                     if (response.isSuccessful()){
-                                        Log.i("-----------", "login good");
+                                        TokenDTO token = response.body();
+                                        Log.i("-----------", token.toString());
+
                                     }else {
                                         Log.e("------!!!-----", "bad request");
                                         try {
                                             String json = response.errorBody().string();
-                                            errorMessage.setText(json);
+                                            Gson gson = new Gson();
+                                            LoginDTOBadRequest resultBad = gson.fromJson(json, LoginDTOBadRequest.class);
+                                            //Log.d(TAG,"++++++++++++++++++++++++++++++++"+response.errorBody().string());
+                                            errorMessage.setText(resultBad.getInvalid());
+
                                         } catch (IOException e) {
                                             e.printStackTrace();
                                         }
