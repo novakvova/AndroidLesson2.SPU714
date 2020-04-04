@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.lesson2layoutmenuadpter.R;
 import com.example.lesson2layoutmenuadpter.network.ProductEntry;
@@ -66,15 +67,20 @@ public class ProductGridFragment extends Fragment {
                 .enqueue(new Callback<List<ProductDTO>>() {
                     @Override
                     public void onResponse(Call<List<ProductDTO>> call, Response<List<ProductDTO>> response) {
-                        Log.d(TAG, "----------Response good----------");
-                        List<ProductDTO> list = response.body();
-                        List<ProductEntry> newlist = new ArrayList<ProductEntry>();//ProductEntry.initProductEntryList(getResources());
-                        for (ProductDTO item : list) {
-                            ProductEntry pe=new ProductEntry(item.getTitle(),item.getUrl(),item.getUrl(), item.getPrice(),"sdfasd");
-                            newlist.add(pe);
+                        if(response.isSuccessful()) {
+                            Log.d(TAG, "----------Response good----------");
+                            List<ProductDTO> list = response.body();
+                            List<ProductEntry> newlist = new ArrayList<ProductEntry>();//ProductEntry.initProductEntryList(getResources());
+                            for (ProductDTO item : list) {
+                                ProductEntry pe = new ProductEntry(item.getTitle(), item.getUrl(), item.getUrl(), item.getPrice(), "sdfasd");
+                                newlist.add(pe);
+                            }
+                            ProductCardRecyclerViewAdapter newAdapter = new ProductCardRecyclerViewAdapter(newlist);
+                            recyclerView.swapAdapter(newAdapter, false);
                         }
-                        ProductCardRecyclerViewAdapter newAdapter = new ProductCardRecyclerViewAdapter(newlist);
-                        recyclerView.swapAdapter(newAdapter, false);
+                        else {
+                            Toast.makeText(getContext(), "Проблема при отримані даних",Toast.LENGTH_LONG).show();
+                        }
                         CommonUtils.hideLoading();
                     }
 

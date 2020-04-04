@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.lesson2layoutmenuadpter.productview.ProductGridFragment;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class MainActivity extends AppCompatActivity implements NavigationHost {
@@ -47,9 +48,10 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         switch(item.getItemId())
         {
             case R.id.table:
+                this.navigateTo(new ProductGridFragment(), true);
                 //Toast.makeText(this, "Зробити фото", Toast.LENGTH_LONG).show();
-                intent = new Intent(this, TableActivity.class);
-                startActivity(intent);
+                //intent = new Intent(this, TableActivity.class);
+                //startActivity(intent);
                 return true;
             case R.id.home:
                 intent = new Intent(this, MainActivity.class);

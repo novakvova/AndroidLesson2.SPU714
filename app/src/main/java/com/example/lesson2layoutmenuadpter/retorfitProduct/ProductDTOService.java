@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProductDTOService {
     private static ProductDTOService mInstance;
-    private static final String BASE_URL = "https://apppeter.azurewebsites.net/api/";
+    private static final String BASE_URL = "https://oksanaivan.azurewebsites.net/api/";
     private Retrofit mRetrofit;
 
     private ProductDTOService() {
