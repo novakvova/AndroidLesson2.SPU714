@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import com.example.lesson2layoutmenuadpter.R;
 import com.example.lesson2layoutmenuadpter.network.ProductEntry;
-import com.example.lesson2layoutmenuadpter.retorfitProduct.ProductDTO;
-import com.example.lesson2layoutmenuadpter.retorfitProduct.ProductDTOService;
+import com.example.lesson2layoutmenuadpter.productview.network.ProductDTO;
+import com.example.lesson2layoutmenuadpter.productview.network.ProductDTOService;
 import com.example.lesson2layoutmenuadpter.utils.CommonUtils;
 
 import java.util.ArrayList;

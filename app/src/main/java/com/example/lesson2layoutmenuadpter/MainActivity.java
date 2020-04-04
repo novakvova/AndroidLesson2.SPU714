@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.example.lesson2layoutmenuadpter.productview.ProductGridFragment;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-public class MainActivity extends AppCompatActivity implements NavigationHost {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,17 +79,4 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         }
     }
 
-    @Override
-    public void navigateTo(Fragment fragment, boolean addToBackstack) {
-        FragmentTransaction transaction =
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.container, fragment);
-
-        if (addToBackstack) {
-            transaction.addToBackStack(null);
-        }
-
-        transaction.commit();
-    }
 }

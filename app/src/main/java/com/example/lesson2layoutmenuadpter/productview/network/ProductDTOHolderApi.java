@@ -1,4 +1,4 @@
-package com.example.lesson2layoutmenuadpter.retorfitProduct;
+package com.example.lesson2layoutmenuadpter.productview.network;
 
 
 import java.util.List;
