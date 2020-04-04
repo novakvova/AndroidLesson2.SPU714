@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lesson2layoutmenuadpter.account.AccountService;
+import com.example.lesson2layoutmenuadpter.account.JwtServiceHolder;
 import com.example.lesson2layoutmenuadpter.account.LoginDTO;
 import com.example.lesson2layoutmenuadpter.account.LoginDTOBadRequest;
 import com.example.lesson2layoutmenuadpter.account.TokenDTO;
@@ -79,6 +80,8 @@ public class LoginFragment extends Fragment {
                                     if (response.isSuccessful()){
                                         TokenDTO token = response.body();
                                         Log.i("-----------", token.toString());
+                                        ((JwtServiceHolder) getActivity()).saveJWTToken(token.getToken()); // Navigate to the register Fragment
+                                        ((NavigationHost) getActivity()).navigateTo(new ProductGridFragment(), false); // Navigate to the products Fragment
 
                                     }else {
                                         Log.e("------!!!-----", "bad request");
