@@ -1,6 +1,8 @@
 package com.example.lesson2layoutmenuadpter.productview.network;
 
 
+import com.example.lesson2layoutmenuadpter.network.interceptors.AuthorizationInterceptor;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -16,6 +18,7 @@ public class ProductDTOService {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient.Builder client = new OkHttpClient.Builder()
+                .addInterceptor(new AuthorizationInterceptor())
                 .addInterceptor(interceptor);
 
         mRetrofit = new Retrofit.Builder()
