@@ -23,10 +23,20 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.container, new LoginFragment())
-                    .commit();
+            String token = this.getToken();
+            if(token != null && !token.isEmpty())
+            {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.container, new ProductGridFragment())
+                        .commit();
+            }
+            else{
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.container, new LoginFragment())
+                        .commit();
+            }
         }
 //        new MaterialAlertDialogBuilder(MainActivity.this)
 //                .setTitle("Title")
@@ -73,6 +83,10 @@ public class MainActivity extends BaseActivity {
                 return true;
             case R.id.edit_past:
                 Toast.makeText(this, "Вставити", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.logout:
+                this.removeToken();
+                this.navigateTo(new LoginFragment(), false);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -20,6 +20,9 @@
         android:title="Простий список"
         app:showAsAction="never" />
 
+    <item android:id="@+id/logout"
+        android:title="Вихід"
+        app:showAsAction="never" />
 
     <item android:id="@+id/edit"
         android:title="Правка"
