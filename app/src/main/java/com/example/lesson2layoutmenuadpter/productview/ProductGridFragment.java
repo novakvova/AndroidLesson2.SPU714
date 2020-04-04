@@ -25,11 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProductGridFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ProductGridFragment extends Fragment {
 
     private static final String TAG = ProductGridFragment.class.getSimpleName();
@@ -79,7 +75,7 @@ public class ProductGridFragment extends Fragment {
                             recyclerView.swapAdapter(newAdapter, false);
                         }
                         else {
-                            Toast.makeText(getContext(), "Проблема при отримані даних",Toast.LENGTH_LONG).show();
+                          //  Toast.makeText(getContext(), "Проблема при отримані даних",Toast.LENGTH_LONG).show();
                         }
                         CommonUtils.hideLoading();
                     }

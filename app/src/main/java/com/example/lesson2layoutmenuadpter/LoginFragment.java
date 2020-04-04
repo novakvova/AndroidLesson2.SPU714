@@ -54,7 +54,9 @@ public class LoginFragment extends Fragment {
                 } else {
                     passwordTextInput.setError(null);
                     //CommonUtils.showLoading(getActivity());
+
                     ((NavigationHost) getActivity()).navigateTo(new ProductGridFragment(), true); // Navigate to the next Fragment
+
                     //h = new Handler();
 //                    uploadData();
 //                    Intent intent;
