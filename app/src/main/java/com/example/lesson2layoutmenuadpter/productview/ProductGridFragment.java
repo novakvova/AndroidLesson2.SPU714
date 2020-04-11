@@ -10,11 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.lesson2layoutmenuadpter.R;
 import com.example.lesson2layoutmenuadpter.network.ProductEntry;
-import com.example.lesson2layoutmenuadpter.productview.network.ProductDTO;
+import com.example.lesson2layoutmenuadpter.productview.dto.ProductDTO;
 import com.example.lesson2layoutmenuadpter.productview.network.ProductDTOService;
 import com.example.lesson2layoutmenuadpter.utils.CommonUtils;
 

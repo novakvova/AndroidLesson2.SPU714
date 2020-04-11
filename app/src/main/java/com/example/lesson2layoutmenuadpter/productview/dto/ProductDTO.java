@@ -1,4 +1,4 @@
-package com.example.lesson2layoutmenuadpter.productview.network;
+package com.example.lesson2layoutmenuadpter.productview.dto;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
