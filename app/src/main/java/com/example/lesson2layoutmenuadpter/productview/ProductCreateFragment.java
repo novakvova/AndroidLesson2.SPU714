@@ -19,11 +19,14 @@ import android.widget.TextView;
 import com.example.lesson2layoutmenuadpter.NavigationHost;
 import com.example.lesson2layoutmenuadpter.R;
 import com.example.lesson2layoutmenuadpter.productview.dto.ProductCreateDTO;
+import com.example.lesson2layoutmenuadpter.productview.dto.ProductCreateInvalidDTO;
 import com.example.lesson2layoutmenuadpter.productview.dto.ProductCreateSuccessDTO;
 import com.example.lesson2layoutmenuadpter.productview.network.ProductDTOService;
 import com.example.lesson2layoutmenuadpter.utils.CommonUtils;
 import com.example.lesson2layoutmenuadpter.utils.FileUtil;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,7 +45,9 @@ public class ProductCreateFragment extends Fragment {
     Button btnSelectImage;
     Button addButton;
 
+    TextInputLayout titleTextInput;
     TextInputEditText titleEditText;
+    TextInputLayout priceTextInput;
     TextInputEditText priceEditText;
     TextView errormessage;
 
@@ -68,7 +73,9 @@ public class ProductCreateFragment extends Fragment {
         chooseImage = (ImageView) view.findViewById(R.id.chooseImage);
         addButton = view.findViewById(R.id.add_button);
 
+        titleTextInput = view.findViewById(R.id.product_title_input_text);
         titleEditText = view.findViewById(R.id.product_title_edit_text);
+        priceTextInput = view.findViewById(R.id.price_text_input);
         priceEditText = view.findViewById(R.id.price_edit_text);
         errormessage = view.findViewById(R.id.error_message);
     }
@@ -100,13 +107,37 @@ public class ProductCreateFragment extends Fragment {
                             public void onResponse(Call<ProductCreateSuccessDTO> call, Response<ProductCreateSuccessDTO> response) {
                                 CommonUtils.hideLoading();
                                 errormessage.setText("");
+                                titleTextInput.setError(null);
+                                priceTextInput.setError(null);
                                 if(response.isSuccessful())
                                 {
                                     ProductCreateSuccessDTO res=response.body();
                                     ((NavigationHost)getActivity()).navigateTo(new ProductGridFragment(),false);
                                 }
                                 else {
-                                    //work error
+                                    try {
+                                        //work error
+                                        String json = response.errorBody().string();
+                                        Gson gson  = new Gson();
+                                        ProductCreateInvalidDTO resultBad = gson.fromJson(json, ProductCreateInvalidDTO.class);
+                                        if(resultBad.getTitle() != null && !resultBad.getTitle().isEmpty()) {
+                                            titleTextInput.setError(resultBad.getTitle());
+                                        }
+                                        if(resultBad.getPrice() != null && !resultBad.getPrice().isEmpty()) {
+                                            priceTextInput.setError(resultBad.getPrice());
+                                        }
+                                        if(resultBad.getImageBase64() != null && !resultBad.getImageBase64().isEmpty()) {
+                                            errormessage.setText(resultBad.getImageBase64());
+                                        }
+                                        if(resultBad.getInvalid() != null && !resultBad.getInvalid().isEmpty()) {
+                                            errormessage.setText(resultBad.getInvalid());
+                                        }
+                                        //Log.d(TAG,"++++++++++++++++++++++++++++++++"+response.errorBody().string());
+                                        //errormessage.setText(resultBad.getInvalid());
+                                    } catch(Exception ex) {
+
+                                    }
+
                                 }
                             }
 
