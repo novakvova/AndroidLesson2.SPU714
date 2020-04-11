@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.lesson2layoutmenuadpter.R;
 import com.example.lesson2layoutmenuadpter.network.ProductEntry;
@@ -30,6 +31,7 @@ public class ProductGridFragment extends Fragment {
     private static final String TAG = ProductGridFragment.class.getSimpleName();
 
     private RecyclerView recyclerView;
+    private Button addButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
