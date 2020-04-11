@@ -32,6 +32,8 @@ public class ProductGridFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private Button addButton;
+    List<ProductEntry> listProductEntry;
+    ProductCardRecyclerViewAdapter productAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,18 +47,35 @@ public class ProductGridFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product_grid, container, false);
 
         // Set up the RecyclerView
+        setupViews(view);
+        setRecyclerView();
+        loadProductEntryList();
+
+        return view;
+    }
+
+    private void setupViews(View view) {
         recyclerView = view.findViewById(R.id.recycler_view);
+        addButton = view.findViewById(R.id.add_button);
+
+        listProductEntry=new ArrayList<>();
+        productAdapter = new ProductCardRecyclerViewAdapter(listProductEntry);
+
+
+    }
+
+    private void setRecyclerView() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
 
-//        List<ProductEntry> list = ProductEntry.initProductEntryList(getResources());
-//        ProductCardRecyclerViewAdapter adapter = new ProductCardRecyclerViewAdapter(list);
-//
-//        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(productAdapter);
 
         int largePadding = getResources().getDimensionPixelSize(R.dimen.shr_product_grid_spacing);
         int smallPadding = getResources().getDimensionPixelSize(R.dimen.shr_product_grid_spacing_small);
         recyclerView.addItemDecoration(new ProductGridItemDecoration(largePadding, smallPadding));
+    }
+
+    private void loadProductEntryList() {
         CommonUtils.showLoading(getActivity());
         ProductDTOService.getInstance()
                 .getJSONApi()
@@ -66,17 +85,16 @@ public class ProductGridFragment extends Fragment {
                     public void onResponse(Call<List<ProductDTO>> call, Response<List<ProductDTO>> response) {
                         if(response.isSuccessful()) {
                             Log.d(TAG, "----------Response good----------");
+                            listProductEntry.clear();
                             List<ProductDTO> list = response.body();
-                            List<ProductEntry> newlist = new ArrayList<ProductEntry>();//ProductEntry.initProductEntryList(getResources());
                             for (ProductDTO item : list) {
                                 ProductEntry pe = new ProductEntry(item.getTitle(), item.getUrl(), item.getUrl(), item.getPrice(), "sdfasd");
-                                newlist.add(pe);
+                                listProductEntry.add(pe);
                             }
-                            ProductCardRecyclerViewAdapter newAdapter = new ProductCardRecyclerViewAdapter(newlist);
-                            recyclerView.swapAdapter(newAdapter, false);
+                            productAdapter.notifyDataSetChanged();
                         }
                         else {
-                          //  Toast.makeText(getContext(), "Проблема при отримані даних",Toast.LENGTH_LONG).show();
+                            //  Toast.makeText(getContext(), "Проблема при отримані даних",Toast.LENGTH_LONG).show();
                         }
                         CommonUtils.hideLoading();
                     }
@@ -88,10 +106,5 @@ public class ProductGridFragment extends Fragment {
                     }
                 });
 
-
-
-
-
-        return view;
     }
 }
