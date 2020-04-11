@@ -15,6 +15,8 @@
     <string name="shr_product_title">Назва продукта</string>
     <string name="shr_product_description">Опис продукта</string>
     <string name="button_add">Додати</string>
+    <string name="button_cancel">Скасувати</string>
+    <string name="product_price">Ціна</string>
 
     <string-array name="sports_images">
         <item>https://www.imgacademy.com/sites/default/files/venue-baseball-pg11.jpg</item>
