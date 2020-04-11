@@ -1,5 +1,6 @@
 package com.example.lesson2layoutmenuadpter.productview;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,12 +19,16 @@ import android.widget.TextView;
 
 import com.example.lesson2layoutmenuadpter.NavigationHost;
 import com.example.lesson2layoutmenuadpter.R;
+import com.example.lesson2layoutmenuadpter.network.ProductEntry;
+import com.example.lesson2layoutmenuadpter.productview.click_listeners.OnDeleteListener;
+import com.example.lesson2layoutmenuadpter.productview.click_listeners.OnEditListener;
 import com.example.lesson2layoutmenuadpter.productview.dto.ProductCreateDTO;
 import com.example.lesson2layoutmenuadpter.productview.dto.ProductCreateInvalidDTO;
 import com.example.lesson2layoutmenuadpter.productview.dto.ProductCreateSuccessDTO;
 import com.example.lesson2layoutmenuadpter.productview.network.ProductDTOService;
 import com.example.lesson2layoutmenuadpter.utils.CommonUtils;
 import com.example.lesson2layoutmenuadpter.utils.FileUtil;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
@@ -36,7 +41,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductCreateFragment extends Fragment {
+public class ProductCreateFragment extends Fragment  {
 
     // TODO: Rename parameter arguments, choose names that match
     public static final int PICKFILE_RESULT_CODE = 1;
@@ -150,6 +155,7 @@ public class ProductCreateFragment extends Fragment {
             }
         });
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
@@ -171,5 +177,6 @@ public class ProductCreateFragment extends Fragment {
                 break;
         }
     }
+
 
 }
