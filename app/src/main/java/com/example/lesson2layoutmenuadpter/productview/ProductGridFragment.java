@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.lesson2layoutmenuadpter.NavigationHost;
 import com.example.lesson2layoutmenuadpter.R;
 import com.example.lesson2layoutmenuadpter.network.ProductEntry;
 import com.example.lesson2layoutmenuadpter.productview.dto.ProductDTO;
@@ -49,7 +50,9 @@ public class ProductGridFragment extends Fragment {
         // Set up the RecyclerView
         setupViews(view);
         setRecyclerView();
+        setButtonAddListener();
         loadProductEntryList();
+
 
         return view;
     }
@@ -73,6 +76,15 @@ public class ProductGridFragment extends Fragment {
         int largePadding = getResources().getDimensionPixelSize(R.dimen.shr_product_grid_spacing);
         int smallPadding = getResources().getDimensionPixelSize(R.dimen.shr_product_grid_spacing_small);
         recyclerView.addItemDecoration(new ProductGridItemDecoration(largePadding, smallPadding));
+    }
+
+    private void setButtonAddListener() {
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((NavigationHost) getActivity()).navigateTo(new ProductCreateFragment(), true);
+            }
+        });
     }
 
     private void loadProductEntryList() {
